@@ -44,6 +44,7 @@ class User(AbstractBaseUser):
 
 class Category(models.Model):
     name = models.CharField(max_length = 30, unique=True)
+    description = models.TextField
 
     class Meta:
         ordering = ('name',)
