@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'Products',
-    'User',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +79,12 @@ WSGI_APPLICATION = 'Essentiaisles.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'grocery_management_system',
+        'USER': 'root',
+        'PASSWORD': 'sylphlike',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
