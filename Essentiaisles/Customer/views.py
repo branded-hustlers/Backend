@@ -1,16 +1,12 @@
-from django.http import JsonResponse
-from django.contrib.auth import login
-from .models import Customer
-from .forms import CustomerForm
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import CustomerSerializer
 
-def register(request):
-  if request.method == 'POST':
-    form = CustomerForm(request.POST)
-    if form.is_valid():
-      email = form.cleaned_data['email']
-      password = generate_strong_password()  # Replace with your password generation function
-      user = Customer.objects.create_user(email, password)
-      login(request, user)
-      return JsonResponse({'message': 'User registration successful!'})
-  else:
-    return JsonResponse({'message': 'Invalid registration data.'})
+class SignUpView(APIView):
+    def post(self, request):
+        serializer = CustomerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

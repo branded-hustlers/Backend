@@ -1,21 +1,13 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Categories, Product
-from .serializers import CategoriesSerializer, ProductSerializer
-
+from .models import Category, Product
+from .serializers import CategorySerializer, ProductSerializer
 # Create your views here.
-
-
 class CategoryViewset(viewsets.ModelViewSet):
-    queryset = Categories.objects.all()
-    serializer_class = CategoriesSerializer
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
 
 
-
-class ProductViewset(viewsets.ModelViewSet):
+class ProductViewset(viewsets.ModelViewset):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-
-
-
-
+    serializer_class = ProductSerializer 
