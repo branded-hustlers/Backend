@@ -1,0 +1,17 @@
+from django import forms
+from .models import Customer
+
+class CustomerForm(forms.ModelForm):
+    other_names = forms.CharField(label="Other Names", max_length=60, required=True)
+    last_name = forms.CharField(label="Last Name", max_length=30, required=True)
+    address = forms.CharField(label="Address", max_length=50)
+    email = forms.EmailField(label="Email", required=True)
+    mobile_phone = forms.CharField(label="Phone Number", max_length=15, required=True)
+    username = forms.CharField(label="Username", max_length=30, required=True)
+    date_of_birth = forms.DateField(label="Date of Birth", required=True, input_formats=['%Y-%m-%d'])
+
+    def clean_mail(email):
+        email = email.strip().lower()
+        email = email.replace('..', '.').replace(' ', '')  # Remove duplicate dots and spaces
+        return email
+
