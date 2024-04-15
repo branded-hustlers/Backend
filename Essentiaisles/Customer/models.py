@@ -19,10 +19,11 @@ class Customer(AbstractBaseUser):
     email = models.EmailField(unique=True)
     mobile_phone = models.CharField(max_length=15, unique=True)
     date_of_birth = models.DateField()
+    password = models.CharField(max_length=255)
     username = models.CharField(max_length=30, unique=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['other_names', 'last_name', 'mobile_phone', 'date_of_birth']
+    REQUIRED_FIELDS = ['other_names', 'last_name', 'mobile_phone', 'date_of_birth', 'password']
 
     objects = UserManager()
 
