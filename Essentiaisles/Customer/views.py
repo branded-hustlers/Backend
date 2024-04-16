@@ -25,7 +25,6 @@ class LoginView(APIView):
         password = request.data.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            # Generate JWT token
             payload = {
                     'user_id': user.id,
                     'exp': datetime.now(timezone.utc) + timedelta(hours=24),

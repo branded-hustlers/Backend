@@ -12,7 +12,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = Customer
-        fields = ['other_names', 'last_name', 'address', 'email', 'mobile_phone', 'username', 'date_of_birth', 'password1', 'password2']
+        fields = ['other_names', 'last_name', 'address', 'email', 'mobile_phone', 'username', 'date_of_birth']
 
 
 
