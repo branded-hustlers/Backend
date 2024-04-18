@@ -5,7 +5,8 @@ This guide will walk you through the process of cloning a repository, creating a
 
 First, clone the repository to your local machine using the following command:
 
-```bash
+git clone <repository_url>
+
 
 ## Step 2: Change Directory
 
