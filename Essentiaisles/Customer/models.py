@@ -70,3 +70,22 @@ class Customer(AbstractBaseUser):
     def is_staff(self):
         "Is the user a member of staff?"
         return self.is_admin
+    
+
+class Staff(models.Model):
+    staff_id = models.IntegerField(primary_key=True)
+    other_names = models.CharField(max_length=60)
+    last_name = models.CharField(max_length=30)
+    email = models.EmailField(max_length=25)
+    mobile_phone = models.CharField(max_length=15)
+    password = models.CharField(max_length=255)
+    username = models.CharField(max_length=30)
+    ROLE_CHOICES = [
+        ('Manager', 'Manager'),
+        ('Store_Staff', 'Store Staff'),
+    ]
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
+    date_of_birth = models.DateField()
+
+    def __str__(self):
+        return f'{self.other_names} {self.last_name}'
