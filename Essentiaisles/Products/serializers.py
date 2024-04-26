@@ -1,14 +1,5 @@
 from rest_framework import serializers
-from .models import User, Category, Product, Cart
-
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'name')
-        extra_kwargs = {'password': {'write_only':True}}
-
-
+from .models import Category, Product
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,18 +8,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    category = CategorySerializer
-    
+    Category = CategorySerializer
+
     class Meta:
         model = Product
-        fields = ('id', 'name', 'category', 'description', 'price', 'image')
-
-
-
-class CartSerializer(serializers.ModelSerializer):
-    user = UserSerializer
-    product = ProductSerializer
-
-    class Meta:
-        model = Cart
-        fields = ('id', 'user', 'product', 'total')
+        fields = '__all__'
