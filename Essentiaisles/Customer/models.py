@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from enum import Enum
 
 #Create your models here
 class CustomerManager(BaseUserManager):
@@ -42,7 +43,7 @@ class Customer(AbstractBaseUser):
     last_name = models.CharField(max_length=30, blank=False, null=False)
     address = models.CharField(max_length=50, blank=True, null=True)
     email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
-    mobile_phone = models.CharField(max_length=15, blank=False, null=False)
+    mobile_phone = models.CharField(max_length=15, blank=False, null=False, unique=True)
     password = models.CharField(max_length=255, blank=False, null=False)
     username = models.CharField(max_length=30, blank=False, null=False, unique=True)
     date_of_birth = models.DateField(blank=False, null=False)
@@ -57,35 +58,32 @@ class Customer(AbstractBaseUser):
 
     def __str__(self):
         return f"{self.other_names} {self.last_name}"
-
-    def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        return True
-
-    def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
-        return True
-
-    @property
-    def is_staff(self):
-        "Is the user a member of staff?"
-        return self.is_admin
     
 
-class Staff(models.Model):
-    staff_id = models.IntegerField(primary_key=True)
-    other_names = models.CharField(max_length=60)
-    last_name = models.CharField(max_length=30)
-    email = models.EmailField(max_length=25)
-    mobile_phone = models.CharField(max_length=15)
-    password = models.CharField(max_length=255)
-    username = models.CharField(max_length=30)
-    ROLE_CHOICES = [
-        ('Manager', 'Manager'),
-        ('Store_Staff', 'Store Staff'),
-    ]
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES)
-    date_of_birth = models.DateField()
+
+
+
+class Roles(Enum):
+    CLERK = 'Clerk'
+    DELIVERY = 'Delivery'
+    ADMIN = 'Admin'
+
+
+
+    
+
+
+class User(AbstractBaseUser):
+    other_names = models.CharField(max_length=60, blank=False, null=False)
+    last_name = models.CharField(max_length = 30, blank=False, null=False)
+    email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
+    mobile_phone = models.CharField(max_length=15, blank=False, null=False, unique=True)
+    password = models.CharField(max_length = 255, blank = False, null = False)
+    username = models.CharField(max_length = 30, blank=False, null=False, unique=True)
+    role = models.CharField(max_length=20, choices=[(roles.name, roles.value) for roles in Roles])
+
+    is_active = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.other_names} {self.last_name}'
+        return f"{self.other_names} {self.last_name}"
