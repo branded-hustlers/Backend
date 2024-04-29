@@ -60,18 +60,3 @@ class OrderedItem(models.Model):
 
     def __str__(self):
         return f"Order Item ID: {self.ordered_items_id}, Order: {self.order}, Product: {self.product}, Quantity: {self.quantity}"
-# # Create Order Items Model
-# class OrderItem(models.Model):
-# 	# Foreign Keys
-# 	order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True)
-# 	product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
-# 	user = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True, blank=True)
-
-# 	quantity = models.PositiveBigIntegerField(default=1)
-# 	price = models.DecimalField(max_digits=7, decimal_places=2)
-
-
-# 	def __str__(self):
-# 		return f'Order Item - {str(self.id)}'
-
-##After this then you makemigrations (I mean for the Order and OrderItem)
