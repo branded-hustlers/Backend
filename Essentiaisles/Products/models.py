@@ -50,3 +50,7 @@ class Inventory(models.Model):
 
     def __str__(self):
         return  f"{self.product} - {self.shelf_life}"
+
+    def update_product_amount(self):
+        self.product.amount = self.current_stock
+        self.product.save()
