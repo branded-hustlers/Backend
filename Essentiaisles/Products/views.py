@@ -60,7 +60,7 @@ class CategoryView(View):
 
 
 
-class InventoryList(APIView):
+class InventoryList(View):
     def get(self, request, format=None):
         inventory = Inventory.objects.all()
         serializer = InventorySerializer(inventory, many=True)
@@ -73,7 +73,7 @@ class InventoryList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class InventoryDetail(APIView):
+class InventoryDetail(View):
     def get_object(self, pk):
         try:
             return Inventory.objects.get(pk=pk)
