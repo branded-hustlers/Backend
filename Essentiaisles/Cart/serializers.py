@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Cart, CartItem
+from .models import Cart, CartItem, Order, OrderedItem
 from Products.serializers import ProductSerializer
 from Customer.serializers import CustomerSerializer
 
@@ -30,3 +30,30 @@ class CartSerializer (serializers.ModelSerializer):
 
     def get_total_cost(self, obj):
         return obj.total_cost
+    
+
+
+
+class OrderedItemSerializer(serializers.ModelSerializer):
+    product = ProductSerializer
+    class Meta:
+        model = OrderedItem
+        fields = '__all__'
+
+
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    item = OrderedItemSerializer(many=True, read_only=True)
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+
+
+class CreateOrderSerializer(serializers.ModelSerializer):
+    cart = CartSerializer
+
+
+    def save(self, **kwargs):
+        return super().save(**kwargs)
