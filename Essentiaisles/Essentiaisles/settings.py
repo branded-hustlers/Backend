@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['tough-things-shake.loca.lt', '127.0.0.1']
 
+AUTH_USER_MODEL = 'Customer.Customer'
+
 
 # Application definition
 
