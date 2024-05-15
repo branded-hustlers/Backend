@@ -1,11 +1,11 @@
 from django.db import models
-from Customer.models import User
+from Customer.models import Customer
 from Products.models import Product
 
 
 
 class Cart(models.Model):
-    user = models.ForeignKey (User, on_delete=models.CASCADE)
+    user = models.ForeignKey (Customer, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     items = models.ManyToManyField(Product, through='CartItem')
 
@@ -40,7 +40,7 @@ class Order(models.Model):
     ]
     
     order_id = models.AutoField(primary_key=True)
-    customer = models.ForeignKey (User, on_delete=models.CASCADE)
+    customer = models.ForeignKey (Customer, on_delete=models.CASCADE)
     order_status = models.CharField(max_length=20, choices=ORDER_STATUS_CHOICES)
 
     
