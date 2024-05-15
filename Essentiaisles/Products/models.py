@@ -1,5 +1,5 @@
 from django.db import models
-from Customer.models import Customer
+from Customer.models import User
 
 # Create your models here.
 class Category(models.Model):
@@ -31,7 +31,7 @@ class Product(models.Model):
 
 
 class ProductReview(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     review = models.TextField()
 
