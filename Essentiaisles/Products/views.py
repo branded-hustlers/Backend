@@ -61,7 +61,13 @@ class CategoryView(APIView):
 
 
 class InventoryList(APIView):
+    """
+    This class defines the list view for the Inventory model.
+    """
     def get(self, request, format=None):
+        """
+        This method handles the GET request for a list of Inventory objects.
+        """
         inventory = Inventory.objects.all()
         serializer = InventorySerializer(inventory, many=True)
         return Response(serializer.data)
@@ -74,6 +80,9 @@ class InventoryList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class InventoryDetail(APIView):
+    """
+    This class defines the details view for the Inventory model.
+    """
     def get_object(self, pk):
         try:
             return Inventory.objects.get(pk=pk)
