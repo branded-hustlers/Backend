@@ -27,6 +27,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['tough-things-shake.loca.lt', '127.0.0.1']
 
+AUTH_USER_MODEL = 'Customer.Customer'
+
+# settings.py
+
+# AUTHENTICATION_BACKENDS = [
+#     'Essentiaisles.auth_backends.CustomerBackend',  # Custom backend
+#     'django.contrib.auth.backends.ModelBackend',  # Default backend
+# ]
+
 
 # Application definition
 

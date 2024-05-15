@@ -5,7 +5,7 @@ from Products.models import Product
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    user = models.ForeignKey (Customer, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     items = models.ManyToManyField(Product, through='CartItem')
 
@@ -40,12 +40,12 @@ class Order(models.Model):
     ]
     
     order_id = models.AutoField(primary_key=True)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer = models.ForeignKey (Customer, on_delete=models.CASCADE)
     order_status = models.CharField(max_length=20, choices=ORDER_STATUS_CHOICES)
 
     
     def __str__(self):
-        return f"Order ID: {self.order_id}, Customer: {self.customer}, Status: {self.order_status}"
+        return f"Order ID: {self.order_id}, User: {self.customer}, Status: {self.order_status}"
 
 
 class OrderedItem(models.Model):
