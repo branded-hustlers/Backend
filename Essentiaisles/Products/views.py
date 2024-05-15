@@ -61,12 +61,21 @@ class CategoryView(APIView):
 
 
 class InventoryList(APIView):
+    """
+    View for listing and creating Inventory objects
+    """
     def get(self, request, format=None):
+        """
+        GET request to list all Inventory objects
+        """
         inventory = Inventory.objects.all()
         serializer = InventorySerializer(inventory, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
+        """
+        POST request to create a new Inventory object
+        """
         serializer = InventorySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -74,6 +83,9 @@ class InventoryList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class InventoryDetail(APIView):
+    """
+    View for retrieving, updating, and deleting an Inventory object
+    """
     def get_object(self, pk):
         try:
             return Inventory.objects.get(pk=pk)
