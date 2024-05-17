@@ -73,6 +73,9 @@ class InventoryList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
+        """
+        This method handles the POST request for creating a new Inventory object.
+        """
         serializer = InventorySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
