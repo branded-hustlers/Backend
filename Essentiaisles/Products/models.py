@@ -1,7 +1,7 @@
 from django.db import models
 from Customer.models import Customer
+from django.utils.text import slugify
 
-# Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=30, unique=True)
     description = models.TextField()
@@ -26,6 +26,15 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+    """This function takes a category name and converts it into a slug"""
+    def generate_product_id(category_name):
+
+        """Generate a unique product ID based on a category name"""
+
+        category_slug = slugify(category_name)
+        product_id = f"product-{category_slug}"
+        return product_id
     
 
 
