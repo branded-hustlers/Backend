@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Cart
 from .models import CartItem
 from .models import Order, OrderedItem
-# Register your models here.
+#Register your models here.
 class CartItemInline(admin.TabularInline):
     model = CartItem
 
